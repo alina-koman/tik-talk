@@ -5,11 +5,15 @@
 /tmp
 /out-tsc
 /bazel-out
+/.angular/
+/coverage
+*.tsbuildinfo
 
 # Node
 /node_modules
-npm-debug.log
+npm-debug.log*
 yarn-error.log
+*.log
 
 # IDEs and editors
 .idea/
@@ -29,15 +33,23 @@ yarn-error.log
 !.vscode/mcp.json
 .history/*
 
+# Local AI editor configuration and downloaded skills
+/.agents/skills/
+/.cursor/
+/skills-lock.json
+
 # Miscellaneous
-/.angular/cache
 .sass-cache/
 /connect.lock
-/coverage
 /libpeerconnection.log
 testem.log
 /typings
 __screenshots__/
+
+# Local environment files
+.env
+.env.*
+!.env.example
 
 # System files
 .DS_Store
