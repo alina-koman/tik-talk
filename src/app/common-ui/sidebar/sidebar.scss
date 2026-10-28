@@ -1,59 +1,90 @@
 .sidebar {
-  width: 280px;
+  width: 340px;
   height: 100vh;
-  flex: 0 0 280px;
+  flex: 0 0 340px;
   background-color: var(--dark-color);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  padding: 32px 24px;
+  padding: 40px 29px 38px;
   position: sticky;
   top: 0;
+  align-self: flex-start;
 
   &__logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 40px;
+    gap: 14px;
+    margin-bottom: 48px;
   }
 
   &__logo-text {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 700;
   }
 
   &__menu {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
     flex: 1;
   }
 
   &__menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 58px;
     padding: 14px 16px;
-    border-radius: 8px;
+    border-radius: 11px;
     color: var(--muted-color);
+    font-size: 20px;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
 
     &:hover, &.active {
       background-color: var(--card-bg);
       color: var(--light-color);
     }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: auto;
   }
 
   &__user {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+    min-height: 84px;
     margin-bottom: 16px;
-    padding: 12px 0;
+    padding: 16px 0 18px;
     border-top: 1px solid var(--border-color);
     color: var(--light-color);
 
     img {
-      width: 42px;
-      height: 42px;
+      flex: 0 0 50px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -72,21 +103,42 @@
       white-space: nowrap;
     }
 
+    strong {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
     small {
       color: var(--muted-color);
+      font-size: 16px;
     }
   }
 
   &__logout {
-    min-height: 44px;
-    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 54px;
+    padding: 0 18px;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 11px;
     background: transparent;
     color: var(--muted-color);
     cursor: pointer;
     font: inherit;
+    font-size: 20px;
     text-align: left;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
 
     &:hover,
     &:focus-visible {
@@ -99,34 +151,64 @@
       outline-offset: 2px;
     }
   }
+}
 
-  @media (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      flex-basis: auto;
-      padding: 16px;
-      border-right: 0;
-      border-bottom: 1px solid var(--border-color);
+@media (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    flex-basis: auto;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-color);
 
-      &__logo {
-        margin-bottom: 12px;
+    &__logo {
+      margin-bottom: 12px;
+
+      svg {
+        width: 34px;
+        height: 34px;
       }
 
-      &__menu {
-        flex-direction: row;
-        gap: 4px;
-        overflow-x: auto;
+      span {
+        font-size: 20px;
+      }
+    }
+
+    &__menu {
+      flex-direction: row;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    &__menu-item {
+      flex: 0 0 auto;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 12px;
+      font-size: 15px;
+    }
+
+    &__user {
+      min-height: 64px;
+      margin: 12px 0 8px;
+      padding: 12px 0;
+
+      strong {
+        font-size: 16px;
       }
 
-      &__menu-item {
-        flex: 0 0 auto;
-        padding: 10px 12px;
+      small {
+        font-size: 13px;
       }
+    }
 
-      &__user {
-        margin: 12px 0 8px;
-      }
+    &__logout {
+      width: fit-content;
+      align-self: flex-end;
+      min-height: 42px;
+      font-size: 15px;
     }
   }
 }

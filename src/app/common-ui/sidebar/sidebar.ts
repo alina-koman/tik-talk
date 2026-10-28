@@ -16,10 +16,10 @@ export class Sidebar {
 
   readonly currentUser = this.authService.currentUser;
 
-  menuItems = [
-    { label: 'Моя сторінка', link: '/profile/me' },
-    { label: 'Чати', link: '/chats' },
-    { label: 'Пошук', link: '/search' },
+  readonly menuItems = [
+    { label: 'Моя сторінка', link: '/profile/me', icon: 'profile' },
+    { label: 'Чати', link: '/chats', icon: 'chats' },
+    { label: 'Пошук', link: '/search', icon: 'search' },
   ];
 
   logout(): void {

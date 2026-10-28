@@ -1,59 +1,85 @@
-# TikTalk
+# Tik-Talk
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.4.
+Tik-Talk — навчальний Angular-застосунок для профілів і спілкування. Оскільки API курсу зараз недоступний, поточна версія використовує локальний деморежим: можна створити акаунт, переглядати профілі та листуватися в межах одного браузера.
 
-## Development server
+> **Важливо:** локальні акаунти не є серверними обліковими записами. Дані не синхронізуються між браузерами чи пристроями. Не використовуйте справжній або повторно використаний пароль.
 
-To start a local development server, run:
+## Можливості
 
-```bash
-ng serve
-```
+- Реєстрація та вхід за ім’ям користувача й паролем.
+- Збереження акаунтів, профілів і повідомлень у `localStorage` цього браузера.
+- Зберігання пароля не у відкритому вигляді: використовується PBKDF2-SHA-256 з окремою випадковою сіллю для кожного акаунта.
+- Відновлення локальної сесії після перезавантаження сторінки та вихід з акаунта.
+- Пошук користувачів за ім’ям і логіном.
+- Перегляд власного та інших профілів, редагування імені й опису.
+- Список діалогів і надсилання повідомлень у локальному деморежимі.
+- Демопрофілі й стартові вхідні повідомлення після реєстрації, щоб інтерфейс одразу був заповнений.
+- Адаптивна бічна панель із навігацією до профілю, чатів і пошуку.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Демопрофілі й повідомлення позначені в інтерфейсі. Це лише приклади: увійти під демоакаунтом не можна.
 
-## Code scaffolding
+## Технології
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular 22, standalone-компоненти та сигнали.
+- TypeScript 6 і Signal Forms.
+- SCSS.
+- Angular Router і Vitest через Angular test runner.
 
-```bash
-ng generate component component-name
-```
+## Запуск
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Потрібні Node.js та npm. Встановіть залежності й запустіть сервер розробки:
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Відкрийте адресу `http://localhost:4200`.
 
-For end-to-end (e2e) testing, run:
+Щоб почати, виберіть **«Створити акаунт»** на сторінці входу або відкрийте `/register`. Ім’я користувача — від 3 до 24 латинських літер, цифр, крапок, дефісів або підкреслень; пароль — щонайменше 8 символів. Після реєстрації акаунт автоматично входить у систему.
+
+## Маршрути
+
+| Маршрут | Призначення |
+| --- | --- |
+| `/register` | Створення локального акаунта |
+| `/login` | Вхід |
+| `/search` | Пошук профілів |
+| `/profile/me` | Власний профіль і його редагування |
+| `/profile/:id` | Перегляд профілю |
+| `/chats` | Діалоги та доступні контакти |
+| `/chats?user=:id` | Діалог із вибраним користувачем |
+
+Маршрути застосунку, крім сторінок входу й реєстрації, закриті guard-ом і перенаправляють гостя на сторінку входу.
+
+## Локальне сховище та обмеження
+
+Дані застосунку зберігаються у браузерному ключі `tik-talk.local-database`, а поточна сесія — у `tik-talk.current-user`. Їх можна видалити через налаштування сайту у браузері — це видалить локальні акаунти, профілі й чати.
+
+Для нового акаунта створюються три демопрофілі та початкові повідомлення. Демодані додаються до локальної бази під час реєстрації; попередні акаунти автоматично переносяться на актуальну версію формату сховища.
+
+Цей режим призначений для локальної демонстрації, а не для публічного розгортання з реальними користувачами:
+
+- немає серверної перевірки облікових даних або контролю доступу;
+- дані існують тільки в локальному сховищі браузера на поточному origin;
+- користувач може змінити локальні дані через інструменти браузера;
+- немає синхронізації чатів у реальному часі чи між пристроями;
+- курсова API-документація та перевірені endpoints на момент реалізації повертали `404`.
+
+Для реальної автентифікації та спільних чатів потрібен доступний бекенд з API реєстрації, авторизації, профілів і повідомлень.
+
+## Перевірки
+
+Production-збірка:
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Unit-тести:
 
-## Additional Resources
+```bash
+npm test -- --watch=false
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Тести перевіряють створення локальних акаунтів, хешування та перевірку паролів, сесію, міграцію сховища, профілі, повідомлення й захист маршрутів.
