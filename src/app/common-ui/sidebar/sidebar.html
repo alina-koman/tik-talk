@@ -1,0 +1,27 @@
+<aside class="sidebar">
+  <div class="sidebar__logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17 0C7.61116 0 0 7.61116 0 17C0 26.3888 7.61116 34 17 34C26.3888 34 34 26.3888 34 17C34 7.61116 26.3888 0 17 0ZM17 31.1333C9.19177 31.1333 2.86667 24.8082 2.86667 17C2.86667 9.19177 9.19177 2.86667 17 2.86667C24.8082 2.86667 31.1333 9.19177 31.1333 17C31.1333 24.8082 24.8082 31.1333 17 31.1333Z" fill="var(--primary-color)"/>
+      <path d="M17 8.5C12.3056 8.5 8.5 12.3056 8.5 17C8.5 21.6944 12.3056 25.5 17 25.5C21.6944 25.5 25.5 21.6944 25.5 17C25.5 12.3056 21.6944 8.5 17 8.5Z" fill="var(--primary-color)" fill-opacity="0.3"/>
+    </svg>
+    <span class="sidebar__logo-text">Tik-Talk</span>
+  </div>
+
+  <nav class="sidebar__menu">
+    @for (item of menuItems; track item.link) {
+      <a [routerLink]="item.link" routerLinkActive="active" class="sidebar__menu-item">
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar__user">
+    <div class="sidebar__user-avatar">
+      <img src="/assets/imgs/img.png" alt="avatar">
+    </div>
+    <div class="sidebar__user-info">
+      <strong>Райн Дослінг</strong>
+      <span>ryan.gosling</span>
+    </div>
+  </div>
+</aside>

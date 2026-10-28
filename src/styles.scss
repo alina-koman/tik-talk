@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --dark-color: #000000;
+  --light-color: #ffffff;
+  --primary-color: #a170ff;
+  --muted-color: #7b7b7b;
+  --border-color: #272727;
+  --bg-color: #121212;
+  --card-bg: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
