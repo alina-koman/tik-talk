@@ -5,7 +5,20 @@
 
 .content {
   flex: 1;
+  min-width: 0;
+  min-height: 100vh;
   background-color: var(--bg-color);
   padding: 40px;
   overflow-y: auto;
+}
+
+@media (max-width: 700px) {
+  :host {
+    flex-direction: column;
+  }
+
+  .content {
+    min-height: auto;
+    padding: 24px 16px;
+  }
 }

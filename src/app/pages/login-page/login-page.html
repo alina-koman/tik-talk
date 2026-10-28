@@ -1,0 +1,54 @@
+<main class="login">
+  <section class="login__card" aria-labelledby="login-title">
+    <a class="login__brand" routerLink="/login" aria-label="Tik-Talk — вхід">
+      <span class="login__brand-mark" aria-hidden="true">T</span>
+      <span>Tik-Talk</span>
+    </a>
+
+    <h1 id="login-title">Вхід</h1>
+    <p class="login__description">Увійдіть, щоб продовжити спілкування</p>
+
+    <form (submit)="$event.preventDefault(); onSubmit()" novalidate>
+      <label class="login__label" for="username">Ім’я користувача</label>
+      <input
+        id="username"
+        type="text"
+        autocomplete="username"
+        placeholder="Ваше ім’я користувача"
+        [formField]="loginForm.username"
+        [attr.aria-invalid]="loginForm.username().invalid() && loginForm.username().touched()"
+        [attr.aria-describedby]="loginForm.username().invalid() && loginForm.username().touched() ? 'username-error' : null"
+      >
+      @if (loginForm.username().invalid() && loginForm.username().touched()) {
+        <p class="login__field-error" id="username-error">{{ loginForm.username().errors()[0].message }}</p>
+      }
+
+      <label class="login__label" for="password">Пароль</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Ваш пароль"
+        [formField]="loginForm.password"
+        [attr.aria-invalid]="loginForm.password().invalid() && loginForm.password().touched()"
+        [attr.aria-describedby]="loginForm.password().invalid() && loginForm.password().touched() ? 'password-error' : null"
+      >
+      @if (loginForm.password().invalid() && loginForm.password().touched()) {
+        <p class="login__field-error" id="password-error">{{ loginForm.password().errors()[0].message }}</p>
+      }
+
+      @if (errorMessage()) {
+        <p class="login__error" role="alert">{{ errorMessage() }}</p>
+      }
+
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Входимо…' : 'Увійти' }}
+      </button>
+    </form>
+
+    <p class="login__register">
+      Ще не маєте акаунта?
+      <a routerLink="/register">Створити акаунт</a>
+    </p>
+  </section>
+</main>

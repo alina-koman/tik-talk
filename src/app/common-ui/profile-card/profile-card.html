@@ -1,14 +1,24 @@
 <div class="profile-card">
   <div class="avatar-name">
-    <img src="/assets/imgs/img.png" alt="avatar" class="profile-card__avatar">
+    <img
+      [ngSrc]="profile().avatarUrl || '/assets/imgs/img.png'"
+      [alt]="'Аватар користувача ' + profile().displayName"
+      width="56"
+      height="56"
+      class="profile-card__avatar"
+    >
 
     <div class="profile-card__name">
-      <strong>Райн Дослінг</strong>
-       <span>ryan.gosling</span>
+      <a [routerLink]="['/profile', profile().id]"><strong>{{ profile().displayName }}</strong></a>
+      <span>&#64;{{ profile().username }}</span>
+      @if (profile().isDemo) {
+        <small class="profile-card__badge">Демо</small>
+      }
     </div>
   </div>
 
-  <div class="profile-card__description">
-
-  </div>
+  <p class="profile-card__description">{{ profile().bio || 'Поки що без опису профілю.' }}</p>
+  <button type="button" class="profile-card__message" (click)="messageRequested.emit(profile().id)">
+    Написати
+  </button>
 </div>

@@ -1,0 +1,71 @@
+<main class="login">
+  <section class="login__card" aria-labelledby="register-title">
+    <a class="login__brand" routerLink="/login" aria-label="Tik-Talk — вхід">
+      <span class="login__brand-mark" aria-hidden="true">T</span>
+      <span>Tik-Talk</span>
+    </a>
+
+    <h1 id="register-title">Створити акаунт</h1>
+    <p class="login__description">Дані акаунта зберігатимуться лише в цьому браузері</p>
+    <p class="login__notice" role="note">
+      Це локальна демоверсія, а не захищений серверний акаунт. Не використовуйте справжній або повторно використаний пароль.
+    </p>
+
+    <form (submit)="$event.preventDefault(); onSubmit()" novalidate>
+      <label class="login__label" for="username">Ім’я користувача</label>
+      <input
+        id="username"
+        type="text"
+        autocomplete="username"
+        placeholder="Наприклад, olena_ua"
+        [formField]="registrationForm.username"
+        [attr.aria-invalid]="registrationForm.username().invalid() && registrationForm.username().touched()"
+        [attr.aria-describedby]="registrationForm.username().invalid() && registrationForm.username().touched() ? 'username-error' : null"
+      >
+      @if (registrationForm.username().invalid() && registrationForm.username().touched()) {
+        <p class="login__field-error" id="username-error">{{ registrationForm.username().errors()[0].message }}</p>
+      }
+
+      <label class="login__label" for="display-name">Ім’я профілю</label>
+      <input
+        id="display-name"
+        type="text"
+        autocomplete="name"
+        placeholder="Як вас звати?"
+        [formField]="registrationForm.displayName"
+        [attr.aria-invalid]="registrationForm.displayName().invalid() && registrationForm.displayName().touched()"
+        [attr.aria-describedby]="registrationForm.displayName().invalid() && registrationForm.displayName().touched() ? 'display-name-error' : null"
+      >
+      @if (registrationForm.displayName().invalid() && registrationForm.displayName().touched()) {
+        <p class="login__field-error" id="display-name-error">{{ registrationForm.displayName().errors()[0].message }}</p>
+      }
+
+      <label class="login__label" for="password">Пароль</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Щонайменше 8 символів"
+        [formField]="registrationForm.password"
+        [attr.aria-invalid]="registrationForm.password().invalid() && registrationForm.password().touched()"
+        [attr.aria-describedby]="registrationForm.password().invalid() && registrationForm.password().touched() ? 'password-error' : null"
+      >
+      @if (registrationForm.password().invalid() && registrationForm.password().touched()) {
+        <p class="login__field-error" id="password-error">{{ registrationForm.password().errors()[0].message }}</p>
+      }
+
+      @if (errorMessage()) {
+        <p class="login__error" role="alert">{{ errorMessage() }}</p>
+      }
+
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Створюємо акаунт…' : 'Зареєструватися' }}
+      </button>
+    </form>
+
+    <p class="login__register">
+      Уже маєте акаунт?
+      <a routerLink="/login">Увійти</a>
+    </p>
+  </section>
+</main>

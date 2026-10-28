@@ -15,13 +15,20 @@
     }
   </nav>
 
-  <div class="sidebar__user">
-    <div class="sidebar__user-avatar">
-      <img src="/assets/imgs/img.png" alt="avatar">
-    </div>
-    <div class="sidebar__user-info">
-      <strong>Райн Дослінг</strong>
-      <span>ryan.gosling</span>
-    </div>
-  </div>
+  @if (currentUser(); as user) {
+    <a class="sidebar__user" routerLink="/profile/me">
+      <img
+        [ngSrc]="user.avatarUrl || '/assets/imgs/img.png'"
+        [alt]="'Аватар ' + user.displayName"
+        width="42"
+        height="42"
+      >
+      <span>
+        <strong>{{ user.displayName }}</strong>
+        <small>&#64;{{ user.username }}</small>
+      </span>
+    </a>
+  }
+
+  <button class="sidebar__logout" type="button" (click)="logout()">Вийти</button>
 </aside>
